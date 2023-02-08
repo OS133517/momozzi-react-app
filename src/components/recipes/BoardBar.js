@@ -1,5 +1,6 @@
 import BoardBarCSS from "./BoardBar.module.css";
 import lyingFork from "../../images/lyingFork.png"
+import img from "../../images/free-icon-scuba-3163524 (1).png"
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -14,7 +15,7 @@ function BoardBar() {
             <div className={BoardBarCSS.boardMenu}>
                 오늘의 랜덤 메뉴
                 <hr/>
-                <img className={BoardBarCSS.boardBarImg} src={lyingFork} alt="랜덤메뉴" onClick=""/>
+                <img className={BoardBarCSS.boardBarImg} src={img} alt="랜덤메뉴" onClick=""/>
                 <div className={BoardBarCSS.boardBarTitle}>
                     <Link path="/adminRecommend">메뉴 이름</Link>
                     <img className={BoardBarCSS.boardBarTitleBtn} src={lyingFork} alt="바로가기버튼"/>
