@@ -1,0 +1,18 @@
+.recommendTitle {
+    background-color: #00CAA6;
+    height: 50px;
+    color: white;
+    font-size: 25px;
+    line-height: 50px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.recommendTitle>span {
+    margin-left: 1%;
+}
+
+.recommendItems {
+    margin: 0 auto;
+    width: 70%;
+}
