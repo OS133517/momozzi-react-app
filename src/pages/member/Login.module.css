@@ -1,0 +1,36 @@
+.loginDiv {
+    margin: 10% auto;
+    width: 350px;
+}
+
+.loginForm {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.loginForm>input {
+    width: 350px;
+    height: 40px;
+}
+
+.loginForm>button {
+    margin-bottom: 1%;
+    width: 359px;
+    height: 45px;
+    background-color: #00CAA6;
+    border: none;
+    color: white;
+    font-size: 25px;
+    padding: 0;
+}
+
+.loginForm>button:hover {
+    cursor: pointer;
+}
+
+.loginForm>a {
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}

@@ -1,0 +1,49 @@
+.header {
+    position: relative;
+}
+
+#welcome {
+    position: absolute;
+    right: 1%;
+    top: -25px;
+}
+
+.headerNav {
+    background-color: #00CAA6;
+    margin-top: 55px;
+    height: 50px;
+    color: white;
+    font-size: 25px;
+    line-height: 50px;
+}
+
+.headerBtn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center;
+}
+.headerBtn:hover {
+    cursor: pointer;
+}
+
+#headerLogo {
+    position: absolute;
+    left: 46.5%;
+    top: -35px;
+}
+
+.headerLink {
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.headerRight {
+    float: right;
+    margin-right: 1%;
+}
