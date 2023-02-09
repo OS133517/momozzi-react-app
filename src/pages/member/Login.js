@@ -27,15 +27,14 @@ function Login() {
             console.log("[Login] Login SUCCESS {}", loginMember);
             navigate("/", {replace : true});
         }
+
     }, [loginMember, navigate]);
 
-    // 로그인 상태일 시 로그인 페이지로 접근 방지
     if(isLogin) {
         console.log("[Login] Login is already authenticated by the server");
-        alert('이미 로그인 되있음');
         return <Navigate to="/"/>;
     }
-
+ 
     // 인풋 입력 시 form state 변경
     const onChangeHandler = (e) => {
         setForm({
