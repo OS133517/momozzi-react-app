@@ -1,0 +1,47 @@
+.detailDiv {
+    display: grid;
+    width: 1440px;
+    margin: 0 auto;
+    grid-template-areas: 
+            "top-left top-right"
+            "bottom bottom";
+}
+
+.imgContainer {
+    grid-area: top-left;
+    width: 300px;
+    margin-left: 50px;
+}
+
+.imgContainer>img {
+    width: 100%;
+}
+
+.description {
+    grid-area: top-right;
+    width: 1000px;
+}
+
+.recipeBody {
+    grid-area: bottom;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.recipeBody>button {
+    width: 46%;
+    background-color: #00CAA6;
+    height: 50px;
+    border: none;
+    font-size: 25px;
+    color: white;
+    margin: 0 1% 0 1%;
+}
+
+.recipeBody>button:hover {
+    cursor: pointer;
+}
+
+.recipeBody>p {
+    margin-left: 50px;
+}

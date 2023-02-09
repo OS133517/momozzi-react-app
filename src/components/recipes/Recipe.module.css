@@ -21,6 +21,7 @@
 
 .recipeDescription {
     margin-top: 2%;
+    padding-left: 2%;
     display: grid;
     grid-template-rows: 15% 70% 10%;
 }
@@ -32,7 +33,7 @@
 .recipeWriter {
     position: relative;
     margin-top: 50%;
-    margin-left: 40%;
+    margin-left: 35%;
 }
 
 #recMedal {
@@ -48,8 +49,8 @@
 }
 
 .medalImg {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     position: absolute;
     left: -10px;
     top: 5px;
