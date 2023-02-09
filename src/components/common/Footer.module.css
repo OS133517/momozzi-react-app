@@ -1,0 +1,11 @@
+.footerDiv {
+    background-color: #00CAA6;
+    height: 100px;
+    display: 'flex';
+    flex-direction: 'center';
+    padding-top: 1%;
+    color: white;
+    margin: 1% auto 0 auto;
+    width: 1600px;
+}
+

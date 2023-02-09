@@ -1,5 +1,8 @@
 .header {
     position: relative;
+    height: 128px;
+    width: 1600px;
+    margin: 0 auto;
 }
 
 #welcome {

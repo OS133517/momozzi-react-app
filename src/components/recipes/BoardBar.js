@@ -13,7 +13,7 @@ function BoardBar() {
     return (
         <div className={BoardBarCSS.boardBarDiv}>
             <div className={BoardBarCSS.boardMenu}>
-                오늘의 랜덤 메뉴
+                <Link to="/">오늘의 랜덤 메뉴</Link>
                 <hr/>
                 <img className={BoardBarCSS.boardBarImg} src={img} alt="랜덤메뉴" onClick=""/>
                 <div className={BoardBarCSS.boardBarTitle}>
@@ -22,7 +22,7 @@ function BoardBar() {
                 </div>
             </div>
             <div className={BoardBarCSS.boardMenu}>
-                오늘의 레시피
+                <Link to="/recipes">오늘의 레시피</Link>
                 <hr/>
                 <img className={BoardBarCSS.boardBarImg} src={lyingFork} alt="오늘의 레시피" onClick=""/>
                 <div className={BoardBarCSS.boardBarTitle}>
@@ -31,7 +31,7 @@ function BoardBar() {
                 </div>
             </div>
             <div className={BoardBarCSS.boardMenu}>
-                관리자 추천 레시피
+                <Link to="/recipes/recommend">관리자 추천 레시피</Link>
                 <hr/>
                 <img className={BoardBarCSS.boardBarImg} src={lyingFork} alt="관리자 추천 레시피" onClick=""/>
                 <div className={BoardBarCSS.boardBarTitle}>

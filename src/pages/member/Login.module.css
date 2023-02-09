@@ -1,5 +1,5 @@
 .loginDiv {
-    margin: 10% auto;
+    margin: 5% auto;
     width: 350px;
 }
 
@@ -12,6 +12,7 @@
 .loginForm>input {
     width: 350px;
     height: 40px;
+    font-size: 25px;
 }
 
 .loginForm>button {
@@ -33,4 +34,5 @@
     text-decoration: none;
     text-align: center;
     color: black;
+    font-size: 20px;
 }

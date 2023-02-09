@@ -1,13 +1,13 @@
 import BoardBar from "../../components/recipes/BoardBar";
-import Recommend from "../../components/recipes/Recommend";
+import TopThree from "../../components/recipes/TopThree";
 
 function Main() {
 
     return (
         <>
             <BoardBar/>
-            <hr/>
-            <Recommend/>
+            <hr style={{width : "85%"}}/>
+            <TopThree/>
         </>
     );
 }

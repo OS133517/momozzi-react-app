@@ -88,11 +88,11 @@ function Header() {
         <>
             {loginModal? <LoginModal setLoginModal={setLoginModal}/> : null}
             <div className={HeaderCSS.header}>
-                {loginMemberName&&<span id={HeaderCSS.welcome}>맛있는 식사하세요~ {loginMemberName}님</span>}
+                {isLogin&&loginMemberName&&<span id={HeaderCSS.welcome}>맛있는 식사하세요~ {loginMemberName}님</span>}
                 <div className={HeaderCSS.headerNav}>
                     <button 
                         className={HeaderCSS.headerBtn}
-                        onClick={onClickLogoHandler}>오늘 뭐먹지</button>
+                        onClick={onClickLogoHandler}>&nbsp;&nbsp;오늘 뭐먹지</button>
                     {/* 로그인 상태에 따라 다른 컴포넌트 랜더링 */}
                     { (isLogin == null || isLogin === undefined) ? <BeforeLogin /> : <AfterLogin />}    
                 </div>

@@ -3,6 +3,7 @@ import Layout from "./layouts/Layout";
 import Main from "./pages/recipes/Main";
 import Login from "./pages/member/Login";
 import Register from "./pages/member/Register";
+import Recipes from "./pages/recipes/Recipes";
 
 function App() {
   return (
@@ -10,7 +11,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Main/>}/>
-
+          <Route path="recipes">
+            <Route index element={<Recipes/>}/>
+            <Route path="recommend" element={<Recipes type='recommend'/>}/>
+          </Route>
         </Route>
         <Route path="/signup" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
