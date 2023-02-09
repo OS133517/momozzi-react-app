@@ -12,6 +12,7 @@ function Login() {
     // 리덕스를 이용하기 위한 디스패치, 셀렉터 선언
     const dispatch = useDispatch();
     const loginMember = useSelector(state => state.memberReducer);// API 요청하여 가져온 loginMember 정보
+    const isLogin = window.localStorage.getItem("accessToken");
 
     // 인풋 폼 데이터 한번에 변경 및 state에 저장
     const [form, setForm] = useState({
@@ -29,9 +30,9 @@ function Login() {
     }, [loginMember, navigate]);
 
     // 로그인 상태일 시 로그인 페이지로 접근 방지
-    if(loginMember.length > 0) {
-        console.log(loginMember);
+    if(isLogin) {
         console.log("[Login] Login is already authenticated by the server");
+        alert('이미 로그인 되있음');
         return <Navigate to="/"/>;
     }
 
