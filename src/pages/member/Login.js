@@ -2,7 +2,6 @@ import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callLoginAPI } from "../../apis/MemberAPICalls";
-import Header from "../../components/common/Header";
 import LoginCSS from "./Login.module.css";
 
 function Login() {
@@ -52,7 +51,6 @@ function Login() {
 
     return (
         <>
-            <Header/>
             <div className={LoginCSS.loginDiv}>
                 <div className={LoginCSS.loginForm}>
                     <input 
