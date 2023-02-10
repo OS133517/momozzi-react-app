@@ -4,7 +4,8 @@ import {
     GET_RECIPES_RECOMMEND,
     GET_RECIPE,
     PUT_RECIPE_RECOMMEND,
-    DELETE_RECIPE} from "../modules/RecipeModule";
+    DELETE_RECIPE,
+    POST_RECIPE} from "../modules/RecipeModule";
 
 export function getCategories() {
     
@@ -154,6 +155,27 @@ export const callRecipeDeleteAPI = ({recipeNo}) => {
         if(result.status === 200) {
             console.log('[RecipeAPICalls] callRecipeDeleteAPI RESULT : ', result);
             dispatch({type : DELETE_RECIPE, payload : result.data});
+        }
+    }
+}
+
+export const callRecipeRegistAPI = ({form}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes`;
+    console.log(form);
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                "Accept" : "*/*"
+            },
+            body: form
+        })
+        .then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[RecipeAPICalls] callRecipeRegistAPI RESULT : ', result);
+            dispatch({type : POST_RECIPE, payload : result.data});
         }
     }
 }

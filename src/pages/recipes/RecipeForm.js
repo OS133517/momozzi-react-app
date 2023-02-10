@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import RecipeFormCSS from "./RecipeForm.module.css";
 import { getCategories } from "../../apis/RecipeAPICalls";
 import pot from "../../images/pot.png";
+import { callRecipeRegistAPI } from "../../apis/RecipeAPICalls";
+import jwtDecode from "jwt-decode";
 
 function RecipeForm() {
 
@@ -17,7 +19,7 @@ function RecipeForm() {
 
     const [form, setForm] = useState({
         recipeName : '',
-        categoryNo : '',
+        categoryNo : '1',
         ingredients : '',
         recipeBody : ''
     });
@@ -62,10 +64,12 @@ function RecipeForm() {
     const onClickRecipeRegistrationHandler = () => {
 
         console.log('[RecipeRegistration] onClickRecipeRegistrationHandler');
-
+        const temp = jwtDecode(window.localStorage.getItem("accessToken"));
+        console.log(temp.memberCode);
         const formData = new FormData();
 
         formData.set("recipeName", form.recipeName);
+        formData.set("memberCode", temp.memberCode);
         formData.set("categoryNo", form.categoryNo);
         formData.set("ingredients", form.ingredients);
         formData.set("recipeBody", form.recipeBody);
@@ -74,16 +78,16 @@ function RecipeForm() {
             formData.set("recipeImage", image);
         }
 
-        console.log("form : ", form);
+        console.log("form : ", form.recipeName);
         console.log("formData : ", formData);
 
-        // dispatch(callProductRegistAPI({	// 상품 상세 정보 조회
-        //     form: formData
-        // }));        
+        dispatch(callRecipeRegistAPI({
+            form: formData
+        }));        
         
         
-        // alert('상품 리스트로 이동합니다.');
-        // navigate('/recipes', { replace: true });
+        alert('레시피 목록으로 이동합니다.');
+        navigate('/recipes', { replace: true });
         // window.location.reload();
     }
 
@@ -107,36 +111,40 @@ function RecipeForm() {
                         onClick={onClickImageUpload}>이미지 업로드</button>
                 </div>
                 <div className={RecipeFormCSS.recipeFormDescription}>
-                    <tr>
-                        <td><label htmlFor="recipeName">레시피명</label></td>
-                        <td><input 
-                            type="text" 
-                            name="recipeName" 
-                            id="recipeName"
-                            onChange={onChangeHandler}
-                            required/><br/></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="categoryNo">카테고리</label></td>
-                        <td><select 
-                        type="selectBox" 
-                        name="categoryNo" 
-                        id="categoryNo"
-                        onChange={onChangeHandler}
-                        required>
-                        {categoryList.map((category, index) => <option key={index} value={index + 1}>{category}</option>)}
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td className={RecipeFormCSS.problem}><span>재료</span></td>
-                        <td><textarea 
-                            rows="6" 
-                            cols="55" 
-                            name="ingredients" 
-                            id="ingredients" 
-                            onChange={onChangeHandler}
-                            required></textarea></td>
-                    </tr>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><label htmlFor="recipeName">레시피명</label></td>
+                                <td><input 
+                                    type="text" 
+                                    name="recipeName" 
+                                    id="recipeName"
+                                    onChange={onChangeHandler}
+                                    required/><br/></td>
+                            </tr>
+                            <tr>
+                                <td><label htmlFor="categoryNo">카테고리</label></td>
+                                <td><select 
+                                type="selectBox" 
+                                name="categoryNo" 
+                                id="categoryNo"
+                                onChange={onChangeHandler}
+                                required>
+                                {categoryList.map((category, index) => <option key={index} value={index + 1}>{category}</option>)}
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td className={RecipeFormCSS.problem}><span>재료</span></td>
+                                <td><textarea 
+                                    rows="6" 
+                                    cols="55" 
+                                    name="ingredients" 
+                                    id="ingredients" 
+                                    onChange={onChangeHandler}
+                                    required></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div className={RecipeFormCSS.recipeBody}>
                     <label htmlFor="recipeBody">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;레시피 내용</label>
