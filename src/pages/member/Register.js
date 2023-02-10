@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "../../components/common/Header";
 import RegisterCSS from "./Register.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { callRegisterAPI } from "../../apis/MemberAPICalls";
@@ -40,7 +39,6 @@ function Register() {
 
     return (
         <>
-            <Header/>
             <div className={RegisterCSS.registerForm}>
                 <label>&nbsp;&nbsp;아이디  <input 
                                                 type="text" 

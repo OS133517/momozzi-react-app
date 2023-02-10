@@ -6,6 +6,8 @@ import BoardCSS from "./Recipes.module.css";
 import standingFork from "../../images/standingFork.png";
 import lyingFork from "../../images/lyingFork.png";
 import { useNavigate } from "react-router-dom";
+import LoginModal from "../../components/common/LoginModal";
+import { decodeJwt } from "../../utils/tokenUtils";
 
 function Recipes({type = 'main'}) {
 
@@ -19,6 +21,7 @@ function Recipes({type = 'main'}) {
     const pageInfo = recipes.pageInfo;
     console.log(pageInfo);
     const [currentPage, setCurrentPage] = useState(1);
+    const [loginModal, setLoginModal] = useState(false);
 
     const pageNumber = [];
     if(pageInfo) {
@@ -60,8 +63,29 @@ function Recipes({type = 'main'}) {
         }
     }
 
+    const onClickRegistHandler = () => {
+
+        // 로그인 상태인지 확인
+        const token = decodeJwt(window.localStorage.getItem("accessToken"));
+        
+        if(token === undefined || token === null) {
+            alert('로그인을 먼저해주세요');
+            setLoginModal(true);
+            return;
+        }
+
+         // 토큰이 만료되었을때 다시 로그인
+         if (token.exp * 1000 < Date.now()) {
+            setLoginModal(true);
+            return ;
+        }
+
+        navigate("/recipe-registration");
+    }
+
     return (
         <div className={BoardCSS.board}>
+            { loginModal ? <LoginModal setLoginModal={ setLoginModal }/> : null}
             <div className={BoardCSS.boardTitle}> 
                 {type === 'main'? <span>&nbsp;오늘의 레시피<img src={standingFork} alt="포크"/></span>:<span>&nbsp;관리자 추천 레시피<img src={standingFork} alt="포크"/></span>}
                 {type === 'main'? <span onClick={onClickBoardHandler}>관리자 추천 레시피&nbsp;<img src={lyingFork} alt="포크"/></span>:<span onClick={onClickBoardHandler}>오늘의 레시피&nbsp;<img src={lyingFork} alt="포크"/></span>}
@@ -76,7 +100,7 @@ function Recipes({type = 'main'}) {
                     recipeList?.length === 0 && <p>레시피가 없습니다.<hr/></p>
                 }
             </div>
-            <div style={{ listStyleType: "none", display: "flex", justifyContent: "center" }}>
+            <div className={BoardCSS.pagingBtnDiv}>
                 { Array.isArray(recipeList) &&
                 <button 
                     onClick={() => setCurrentPage(currentPage - 1)} 
@@ -105,7 +129,9 @@ function Recipes({type = 'main'}) {
                     &gt;
                 </button>
                 }
+                {type === 'main' && <button className={BoardCSS.insertBtn} onClick={onClickRegistHandler}>레시피 등록</button>}
             </div>
+            
         </div>
     );
 }

@@ -60,3 +60,26 @@
     cursor: pointer;
     background-color: rgb(12, 250, 180);
 }
+
+.pagingBtnDiv {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    list-style: none;
+}
+
+.insertBtn {
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #00CAA6;
+    border: none;
+    color: white;
+    height: 30px;
+    position: absolute;
+    right: 10px;
+}
+
+.insertBtn:hover {
+    cursor: pointer;
+    background-color: rgb(12, 250, 180);
+}

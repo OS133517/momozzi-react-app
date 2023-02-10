@@ -96,7 +96,7 @@ function Header() {
                     {/* 로그인 상태에 따라 다른 컴포넌트 랜더링 */}
                     { (isLogin == null || isLogin === undefined) ? <BeforeLogin /> : <AfterLogin />}    
                 </div>
-                <img id={HeaderCSS.headerLogo} src={logo} alt="로고" onClick=""/>
+                <img id={HeaderCSS.headerLogo} src={logo} alt="로고" onClick={onClickLogoHandler}/>
             </div>
         </>
     );
