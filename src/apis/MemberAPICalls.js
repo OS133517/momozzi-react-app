@@ -1,6 +1,8 @@
 import { 
     POST_LOGIN,
-    POST_REGISTER} from "../modules/MemberModule";
+    POST_REGISTER,
+    PUT_UPDATE,
+    DELETE_UNREGIST} from "../modules/MemberModule";
 
 export const callLoginAPI = ({form}) => {
     const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/auth/login`;
@@ -66,6 +68,60 @@ export const callRegisterAPI = ({form}) => {
 
         if(result.status === 201) {
             dispatch({type : POST_REGISTER, payload : result});
+        } 
+    }
+}
+
+export const callMyUpdateAPI = ({form}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/members`;
+
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL, {
+            method : "PUT",
+            headers : {
+                "Content-Type" : "application/json",
+                "Accept" : "*/*",
+                "Authorization" : "Bearer " + window.localStorage.getItem("accessToken") 
+            },
+            body : JSON.stringify({
+                memberPassword : form?.memberPassword,
+                memberEmail : form.memberEmail
+            })
+        })
+        .then(response => response.json());
+
+        console.log('[MemberAPICalls] callMyUpdateAPI RESULT : ', result);
+
+        if(result.status === 200) {
+            dispatch({type : PUT_UPDATE, payload : result});
+        } 
+    }
+}
+
+export const callUnregisterAPI = ({memberPassword}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/members`;
+
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL, {
+            method : "DELETE",
+            headers : {
+                "Content-Type" : "application/json",
+                "Accept" : "*/*",
+                "Authorization" : "Bearer " + window.localStorage.getItem("accessToken") 
+            },
+            body : JSON.stringify({
+                memberPassword : memberPassword
+            })
+        })
+        .then(response => response.json());
+
+        console.log('[MemberAPICalls] callUnregisterAPI RESULT : ', result);
+        alert(result.message);
+
+        if(result.status === 200) {
+            dispatch({type : DELETE_UNREGIST, payload : result});
         } 
     }
 }

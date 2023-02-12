@@ -25,8 +25,10 @@ function Login() {
         if(loginMember.status === 200) {
             console.log("[Login] Login SUCCESS {}", loginMember);
             navigate("/", {replace : true});
+        } else if (loginMember.state === 400){
+            console.log("[Login] Login FAIL {}", loginMember);
+            alert(loginMember.message);
         }
-
     }, [loginMember, navigate]);
 
     if(isLogin) {

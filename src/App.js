@@ -6,6 +6,11 @@ import Register from "./pages/member/Register";
 import Recipes from "./pages/recipes/Recipes";
 import RecipeDetail from "./pages/recipes/RecipeDetail";
 import RecipeForm from "./pages/recipes/RecipeForm";
+import MyPage from "./pages/member/MyPage";
+import MyPageUpdate from "./pages/member/MyPageUpdate";
+import MyRecipe from "./pages/member/MyRecipe";
+import MyActivity from "./pages/member/MyAcitivity";
+import Unregister from "./pages/member/Unregister";
 
 function App() {
   return (
@@ -21,6 +26,12 @@ function App() {
           <Route path="recipe-registration" element={<RecipeForm/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Register/>}/>
+        </Route>
+        <Route path="/mypage" element={<MyPage/>}>
+          <Route index element={<MyPageUpdate/>}/>
+          <Route path="myrecipe" element={<MyRecipe/>}/>
+          <Route path="myactivity" element={<MyActivity/>}/>
+          <Route path="unregister" element={<Unregister/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

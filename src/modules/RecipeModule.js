@@ -4,7 +4,7 @@ import { createActions, handleActions } from 'redux-actions';
 const initialState = [];
 
 // 액션
-export const GET_RECIPES_TOP = 'recipe/GET_RECIPES_TOP';
+export const GET_RECIPES_TOP_AND_RANDOM = 'recipe/GET_RECIPES_TOP_AND_RANDOM';
 export const GET_RECIPES = 'recipe/GET_RECIPES';
 export const GET_RECIPES_RECOMMEND = 'recipe/GET_RECIPES_RECOMMEND';
 export const GET_RECIPE = 'recipe/GET_RECIPE';
@@ -13,7 +13,7 @@ export const DELETE_RECIPE = 'recipe/DELETE_RECIPE';
 export const POST_RECIPE = 'recipe/POST_RECIPE';
 // eslint-disable-next-line
 const actions = createActions({
-    [GET_RECIPES_TOP] : () => {},
+    [GET_RECIPES_TOP_AND_RANDOM] : () => {},
     [GET_RECIPES] : () => {},
     [GET_RECIPES_RECOMMEND] : () => {},
     [GET_RECIPE] : () => {},
@@ -24,7 +24,7 @@ const actions = createActions({
 
 // 리듀서
 const recipeReducer = handleActions({
-    [GET_RECIPES_TOP] : (state, {payload}) => payload,
+    [GET_RECIPES_TOP_AND_RANDOM] : (state, {payload}) => payload,
     [GET_RECIPES] : (state, {payload}) => payload,
     [GET_RECIPES_RECOMMEND] : (state, {payload}) => payload,
     [GET_RECIPE] : (state, {payload}) => payload,

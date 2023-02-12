@@ -1,0 +1,26 @@
+.unregisterFormDiv {
+    margin-top: 10%;
+    margin-left: 20%;
+    font-size: 25px;
+}
+
+.unregisterFormDiv input {
+    height: 50px;
+    width: 400px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.unregisterFormDiv button {
+    background-color: #00CAA6;
+    height: 50px;
+    width: 400px;
+    border: none;
+    /* margin-left: 100px; */
+    font-size: 25px;
+    color: white;
+}
+
+.unregisterFormDiv button:hover {
+    cursor: pointer;
+}

@@ -21,7 +21,7 @@ function Register() {
         if(member.status === 201) {
             console.log("[Login] Register SUCCESS {}", member);
             navigate("/login", {replace : true});
-        }
+        } 
     },[member, navigate]);
 
     const onChangeHandler = (e) => {

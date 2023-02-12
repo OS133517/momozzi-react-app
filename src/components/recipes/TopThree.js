@@ -2,7 +2,7 @@ import TopThreeCSS from './TopThree.module.css';
 import Recipe from './Recipe';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { callRecipeTop3ListAPI } from '../../apis/RecipeAPICalls';
+import { callRecipeTop3AndRandomListAPI } from '../../apis/RecipeAPICalls';
 
 function TopThree() {
 
@@ -10,11 +10,11 @@ function TopThree() {
     const dispatch = useDispatch();
     const topThreeList = useSelector(state => state.recipeReducer);
 
-    useEffect(() => {
-        dispatch(callRecipeTop3ListAPI());
-        }// eslint-disable-next-line
-        , []
-    );
+    // useEffect(() => {
+    //     dispatch(callRecipeTop3AndRandomListAPI());
+    //     }// eslint-disable-next-line
+    //     , []
+    // );
 
     return (
         <div>
@@ -24,7 +24,7 @@ function TopThree() {
             <div className={TopThreeCSS.recommendItems}>
                 <hr/>
                 {
-                    topThreeList.length > 0 && topThreeList.map((recipe, index) => (<Recipe key={recipe.recipeNo} recipe={recipe} index={index} />))
+                    topThreeList.length > 0 && topThreeList.filter((recipe, index) => index < 3).map((recipe, index) => (<Recipe key={recipe.recipeNo} recipe={recipe} index={index} />))
                 }
             </div>
         </div>

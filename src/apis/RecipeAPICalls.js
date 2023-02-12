@@ -1,36 +1,15 @@
 import { 
-    GET_RECIPES_TOP,
     GET_RECIPES,
     GET_RECIPES_RECOMMEND,
     GET_RECIPE,
     PUT_RECIPE_RECOMMEND,
     DELETE_RECIPE,
-    POST_RECIPE} from "../modules/RecipeModule";
+    POST_RECIPE,
+    GET_RECIPES_TOP_AND_RANDOM} from "../modules/RecipeModule";
 
 export function getCategories() {
     
     return (["한식", "양식", "분식", "중식", "일식", "디저트", "멕시칸", "프렌치", "동남아시아식", "이탈리안"]);
-}
-
-export const callRecipeTop3ListAPI = () => {
-    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes/top3`;
-
-    return async (dispatch, get) => {
-
-        const result = await fetch(requestURL, {
-            method : 'GET',
-            headers : {
-                "Content-Type" : "application/json",
-                "Accept" : "*/*"
-            }
-        })
-        .then(response => response.json());
-
-        if(result.status === 200) {
-            console.log('[RecipeAPICalls] callRecipeTop3ListAPI RESULT : ', result);
-            dispatch({type : GET_RECIPES_TOP, payload : result.data});
-        }
-    }
 }
 
 export const callRecipeListAPI = ({currentPage}) => {
@@ -114,7 +93,8 @@ export const callRecipeDetailAPI = ({recipeNo}) => {
 
 export const callRecipeRecommendAPI = ({recipeNo, role}) => {
     let requestURL;
-    if(role === 'ROLE_ADMIN') {
+    console.log('role : ', role);
+    if(role.auth[0] === 'ROLE_ADMIN') {
         requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes-recommend/${recipeNo}`;
     } else {
         requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes-thumbs-up/${recipeNo}`;
@@ -176,6 +156,48 @@ export const callRecipeRegistAPI = ({form}) => {
         if(result.status === 200) {
             console.log('[RecipeAPICalls] callRecipeRegistAPI RESULT : ', result);
             dispatch({type : POST_RECIPE, payload : result.data});
+        }
+    }
+}
+
+// export const callRecipeRandomAPI = () => {
+//     const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes/random`;
+
+//     return async (dispatch, getState) => {
+
+//         const result = await fetch(requestURL, {
+//             method : "GET",
+//             headers : {
+//                 "Accept" : "*/*"
+//             }
+//         })
+//         .then(response => response.json());
+
+//         if(result.status === 200) {
+//             console.log('[RecipeAPICalls] callRecipeRandomAPI RESULT : ', result);
+//             dispatch({type : GET_RECIPES_RANDOM, payload : result.data});
+//         }
+//     }
+// }
+
+
+export const callRecipeTop3AndRandomListAPI = () => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes/top3-and-randoms`;
+
+    return async (dispatch, get) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Accept" : "*/*"
+            }
+        })
+        .then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[RecipeAPICalls] callRecipeTop3AndRandomListAPI RESULT : ', result);
+            dispatch({type : GET_RECIPES_TOP_AND_RANDOM, payload : result.data});
         }
     }
 }

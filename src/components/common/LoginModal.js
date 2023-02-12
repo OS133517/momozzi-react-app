@@ -36,8 +36,15 @@ function LoginModal({setLoginModal}) {
         window.location.reload();
     }
 
+    const onClickModalHandler = (e) => {
+        console.log(e.target.className);
+        if(e.target.className === 'LoginModal_modal__npKyi') {
+            setLoginModal(false);
+        }
+    }
+
     return (
-        <div className={LoginModalCSS.modal} onClick={() => setLoginModal(false)}>
+        <div className={LoginModalCSS.modal} onClick={onClickModalHandler}>
         <div className={ LoginModalCSS.modalContainer }>
              <div className={LoginModalCSS.header}>
                 <div className={LoginModalCSS.headerNav}>
