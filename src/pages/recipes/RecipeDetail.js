@@ -60,21 +60,24 @@ function RecipeDetail() {
             return;
         }
 
-         // 토큰이 만료되었을때 다시 로그인
-         if (jwtDecode(isLogin).exp * 1000 < Date.now()) {
+        // 토큰이 만료되었을때 다시 로그인
+        if (jwtDecode(isLogin).exp * 1000 < Date.now()) {
             setLoginModal(true);
             return ;
         }
     }
 
     const onClickDeleteHandler = () => {
-        dispatch(callRecipeDeleteAPI({
-            recipeNo : params.recipeNo
-        }));
 
-        alert('목록 화면으로 돌아갑니다.');
-        navigate('/recipes', { replace: true });
-        window.location.reload();
+        if(window.confirm("정말로 삭제하시겠습니까?")) {
+            dispatch(callRecipeDeleteAPI({
+                recipeNo : params.recipeNo
+            }));
+    
+            alert('목록 화면으로 돌아갑니다.');
+            navigate('/recipes', { replace: true });
+            window.location.reload();
+        }
     }
 
     const onClickUpdateHandler = () => {

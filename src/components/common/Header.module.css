@@ -38,6 +38,10 @@
     top: -35px;
 }
 
+#headerLogo:hover {
+    cursor: pointer;
+}
+
 .headerLink {
     text-decoration: none;
     color: white;

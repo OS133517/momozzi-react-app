@@ -1,0 +1,26 @@
+.updateFormDiv {
+    margin-top: 10%;
+    margin-left: 20%;
+    font-size: 25px;
+}
+
+.updateFormDiv input {
+    height: 50px;
+    width: 300px;
+    margin-left: 100px;
+}
+
+.updateFormDiv button {
+    background-color: #00CAA6;
+    height: 50px;
+    width: 100%;
+    border: none;
+    font-size: 25px;
+    color: white;
+    border-bottom: 1px solid white;
+    margin-top: 20px;
+}
+
+.updateFormDiv button:hover {
+    cursor: pointer;
+}

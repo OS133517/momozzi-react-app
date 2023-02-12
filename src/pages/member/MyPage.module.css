@@ -1,0 +1,27 @@
+.myPageDiv {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    width: 1600px;
+    margin: 0 auto;
+}
+
+.myPageSideBar {
+    display: flex;
+    flex-direction: column;
+    background-color: #00CAA6;
+    height: 700px;
+    border-bottom: 1px solid white;
+}
+
+.myPageSideBar>button {
+    background-color: #00CAA6;
+    height: 50px;
+    border: none;
+    font-size: 25px;
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.myPageContent {
+
+}

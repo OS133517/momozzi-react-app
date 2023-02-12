@@ -79,7 +79,7 @@ function Header() {
             <div className={HeaderCSS.headerRight}>
                 <button className={HeaderCSS.headerBtn} onClick={onClickMypageHandler}>마이페이지</button>
                 <span>  |  </span>
-                <button className={HeaderCSS.headerBtn} onClick={onClickLogoutHandler}> 로그아웃</button>
+                <button className={HeaderCSS.headerBtn} onClick={onClickLogoutHandler}>로그아웃</button>
             </div>
         );
     }
