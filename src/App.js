@@ -11,6 +11,7 @@ import MyPageUpdate from "./pages/member/MyPageUpdate";
 import MyRecipe from "./pages/member/MyRecipe";
 import MyActivity from "./pages/member/MyAcitivity";
 import Unregister from "./pages/member/Unregister";
+import RecipeUpdate from "./pages/recipes/RecipeUpdate";
 
 function App() {
   return (
@@ -21,9 +22,11 @@ function App() {
           <Route path="recipes">
             <Route index element={<Recipes/>}/>
             <Route path="recommend" element={<Recipes type='recommend'/>}/>
+            <Route path="categories/:categoryNo" element={<Recipes type='category'/>}/>
             <Route path=":recipeNo" element={<RecipeDetail/>}/>
+            <Route path="register" element={<RecipeForm/>}/>
+            <Route path="update/:recipeNo" element={<RecipeUpdate/>}/>
           </Route>
-          <Route path="recipe-registration" element={<RecipeForm/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Register/>}/>
         </Route>

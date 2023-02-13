@@ -5,7 +5,28 @@ import {
     PUT_RECIPE_RECOMMEND,
     DELETE_RECIPE,
     POST_RECIPE,
-    GET_RECIPES_TOP_AND_RANDOM} from "../modules/RecipeModule";
+    GET_RECIPES_TOP_AND_RANDOM,
+    PUT_RECIPE,
+    GET_RECIPES_CATEGORY,
+    POST_MY_RECIPE} from "../modules/RecipeModule";
+
+export function getRandom() {
+
+    const categoryList = getCategories();
+
+    const random = Math.floor(Math.random() * categoryList.length);
+    const randomMenu = getCategories()[random];
+
+    return {
+        categoryNo : random,
+        categoryName : randomMenu
+    };
+}
+
+export function getCategoryName(index) {
+
+     return getCategories()[index];
+}
 
 export function getCategories() {
     
@@ -149,7 +170,7 @@ export const callRecipeRegistAPI = ({form}) => {
             headers : {
                 "Accept" : "*/*"
             },
-            body: form
+            body : form
         })
         .then(response => response.json());
 
@@ -195,9 +216,83 @@ export const callRecipeTop3AndRandomListAPI = () => {
         })
         .then(response => response.json());
 
+        console.log('result : ', result);
+
         if(result.status === 200) {
             console.log('[RecipeAPICalls] callRecipeTop3AndRandomListAPI RESULT : ', result);
             dispatch({type : GET_RECIPES_TOP_AND_RANDOM, payload : result.data});
+        }
+    }
+}
+
+export const callRecipeUpdateAPI = ({form}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes`;
+    console.log('form', form);
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+           
+            method : "PUT",
+            headers : {
+                "Accept" : "*/*"
+            },
+            body : form
+        })
+        .then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[RecipeAPICalls] callRecipeUpdateAPI RESULT : ', result);
+            dispatch({type : PUT_RECIPE, payload : result.data});
+        }
+    }
+}
+
+export const callRecipeByCategoryAPI = ({categoryNo, currentPage}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes/categories/${categoryNo}?offset=${currentPage}`;
+
+    console.log('[RecipeAPICalls] requestURL : ', requestURL);
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "GET",
+            headers : {
+                "Content-Type" : "application/json",
+                "Accept" : "*/*"
+            }
+        })
+        .then(response => response.json());
+
+        if(result.status === 200) {
+            console.log('[RecipeAPICalls] callRecipeByCategoryAPI RESULT', result);
+            dispatch({type : GET_RECIPES_CATEGORY, payload : result.data});
+        }
+    }
+}
+
+export const callMyRecipeRegistAPI = ({memberCode, recipeNo}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/recipes/my-recipe`;
+
+    return async (dispatch, getState) => {
+        
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+                "Accept" : "*/*"
+            },
+            body : {
+                memberCode : memberCode,
+                recipeNo : recipeNo
+            }
+        })
+        .then(response => response.json());
+
+        console.log("params", recipeNo, memberCode);
+        
+        if(result.status === 200) {
+            console.log('[RecipeAPICalls] callMyRecipeRegistAPI RESULT', result);
+            dispatch({type : POST_MY_RECIPE, payload : result.data});
         }
     }
 }

@@ -2,7 +2,9 @@ import {
     POST_LOGIN,
     POST_REGISTER,
     PUT_UPDATE,
-    DELETE_UNREGIST} from "../modules/MemberModule";
+    DELETE_UNREGIST,
+    GET_ACTIVITY,
+    GET_MY_RECIPE} from "../modules/MemberModule";
 
 export const callLoginAPI = ({form}) => {
     const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/auth/login`;
@@ -122,6 +124,52 @@ export const callUnregisterAPI = ({memberPassword}) => {
 
         if(result.status === 200) {
             dispatch({type : DELETE_UNREGIST, payload : result});
+        } 
+    }
+}
+
+export const callMyActivityAPI = ({memberCode, currentPage}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/members/${memberCode}/activity?offset=${currentPage}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "GET",
+            headers : {
+                "Content-Type" : "application/json",
+                "Accept" : "*/*",
+                "Authorization" : "Bearer " + window.localStorage.getItem("accessToken") 
+            }
+        })
+        .then(response => response.json());
+
+        console.log('[MemberAPICalls] callMyActivityAPI RESULT : ', result);
+
+        if(result.status === 200) {
+            dispatch({type : GET_ACTIVITY, payload : result.data});
+        } 
+    }
+}
+
+export const callMyRecipeAPI = ({memberCode, currentPage}) => {
+    const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8090/api/v1/members/${memberCode}/my-recipe?offset=${currentPage}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "GET",
+            headers : {
+                "Content-Type" : "application/json",
+                "Accept" : "*/*",
+                "Authorization" : "Bearer " + window.localStorage.getItem("accessToken") 
+            }
+        })
+        .then(response => response.json());
+
+        console.log('[MemberAPICalls] callMyRecipeAPI RESULT : ', result);
+
+        if(result.status === 200) {
+            dispatch({type : GET_MY_RECIPE, payload : result.data});
         } 
     }
 }

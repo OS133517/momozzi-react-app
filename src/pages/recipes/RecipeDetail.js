@@ -7,6 +7,7 @@ import jwtDecode from "jwt-decode";
 import LoginModal from "../../components/common/LoginModal";
 import { callRecipeRecommendAPI } from "../../apis/RecipeAPICalls";
 import { callRecipeDeleteAPI } from "../../apis/RecipeAPICalls";
+import { callMyRecipeRegistAPI } from "../../apis/RecipeAPICalls";
 
 function RecipeDetail() {
 
@@ -37,10 +38,10 @@ function RecipeDetail() {
             return;
         }
 
-         // 토큰이 만료되었을때 다시 로그인
-         if (jwtDecode(isLogin).exp * 1000 < Date.now()) {
-            setLoginModal(true);
-            return ;
+        // 토큰이 만료되었을때 다시 로그인
+        if (jwtDecode(isLogin).exp * 1000 < Date.now()) {
+        setLoginModal(true);
+        return ;
         }
 
         dispatch(callRecipeRecommendAPI({
@@ -65,9 +66,31 @@ function RecipeDetail() {
             setLoginModal(true);
             return ;
         }
+
+        dispatch(callMyRecipeRegistAPI({
+            memberCode : jwtDecode(isLogin).memberCode,
+            recipeNo : recipe.recipeNo
+        }));
+
+        alert('목록 화면으로 돌아갑니다.');
+        // navigate('/recipes', { replace: true });
+        // window.location.reload();
     }
 
     const onClickDeleteHandler = () => {
+
+        // 로그인 상태인지 확인
+        if(isLogin === null) {
+            alert('로그인을 먼저해주세요');
+            setLoginModal(true);
+            return;
+        }
+
+        // 토큰이 만료되었을때 다시 로그인
+        if (jwtDecode(isLogin).exp * 1000 < Date.now()) {
+            setLoginModal(true);
+            return ;
+        }
 
         if(window.confirm("정말로 삭제하시겠습니까?")) {
             dispatch(callRecipeDeleteAPI({
@@ -81,7 +104,7 @@ function RecipeDetail() {
     }
 
     const onClickUpdateHandler = () => {
-        
+        navigate(`/recipes/update/${params.recipeNo}`);
     }
 
     return (

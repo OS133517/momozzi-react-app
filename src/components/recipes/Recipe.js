@@ -34,7 +34,7 @@ function Recipe({recipe, index = 4}) {
                 {index === 1 && <img className={RecipeCSS.medalImg} src={silver} alt="top2"/>}
                 {index === 2 && <img className={RecipeCSS.medalImg} src={bronze} alt="top3"/>}
             </div>
-            <hr/>
+            <hr style={{width : '1600px'}}/>
         </>
     );
 }
