@@ -1,20 +1,7 @@
 import TopThreeCSS from './TopThree.module.css';
 import Recipe from './Recipe';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { callRecipeTop3AndRandomListAPI } from '../../apis/RecipeAPICalls';
 
-function TopThree() {
-
-    // 리덕스를 이용하기 위한 디스패처, 셀렉터 선언
-    const dispatch = useDispatch();
-    const topThreeList = useSelector(state => state.recipeReducer);
-
-    // useEffect(() => {
-    //     dispatch(callRecipeTop3AndRandomListAPI());
-    //     }// eslint-disable-next-line
-    //     , []
-    // );
+function TopThree({topAndRandomList}) {
 
     return (
         <div>
@@ -22,9 +9,9 @@ function TopThree() {
                 <span>TOP 3 레시피</span>
             </div>
             <div className={TopThreeCSS.recommendItems}>
-                <hr/>
+                <hr style={{width : '1600px'}}/>
                 {
-                    topThreeList.length > 0 && topThreeList.filter((recipe, index) => index < 3).map((recipe, index) => (<Recipe key={recipe.recipeNo} recipe={recipe} index={index} />))
+                    topAndRandomList.length > 0 && topAndRandomList.filter((recipe, index) => index < 3).map((recipe, index) => (<Recipe key={recipe.recipeNo} recipe={recipe} index={index} />))
                 }
             </div>
         </div>

@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Recipe from "../../components/recipes/Recipe";
-import { callRecipeListAPI, callRecipeListRecommendAPI } from "../../apis/RecipeAPICalls";
+import { callRecipeListAPI, callRecipeListRecommendAPI, getCategoryName } from "../../apis/RecipeAPICalls";
 import BoardCSS from "./Recipes.module.css";
 import standingFork from "../../images/standingFork.png";
 import lyingFork from "../../images/lyingFork.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoginModal from "../../components/common/LoginModal";
 import { decodeJwt } from "../../utils/tokenUtils";
+import { callRecipeByCategoryAPI } from "../../apis/RecipeAPICalls";
 
 function Recipes({type = 'main'}) {
 
     // 리덕스를 이용하기 위한 디스패처, 셀렉터 선언 + navigate
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const params = useParams();
     const recipes = useSelector(state => state.recipeReducer);
     console.log(recipes);
     const recipeList = recipes.data;
@@ -22,6 +24,7 @@ function Recipes({type = 'main'}) {
     console.log(pageInfo);
     const [currentPage, setCurrentPage] = useState(1);
     const [loginModal, setLoginModal] = useState(false);
+    const [categoryName, setCategoryName] = useState('');
 
     const pageNumber = [];
     if(pageInfo) {
@@ -45,6 +48,13 @@ function Recipes({type = 'main'}) {
                         currentPage : currentPage
                     }));
                     break;
+                case 'category' :
+                    dispatch(callRecipeByCategoryAPI({
+                        categoryNo : params.categoryNo,
+                        currentPage : currentPage
+                    }));
+                    setCategoryName(getCategoryName(params.categoryNo - 1));
+                    break;
                 default : 
                     dispatch(callRecipeListAPI({
                         currentPage : currentPage
@@ -55,11 +65,11 @@ function Recipes({type = 'main'}) {
         , [currentPage, type]
     );
 
-    const onClickBoardHandler = () => {
-        switch(type) {
-            case 'main' :  navigate("/recipes/recommend"); break;
-            case 'recommend' : navigate('/recipes'); break;
-            default : navigate("/recipes/recommend"); break;
+    const onClickBoardHandler = (board) => {
+        switch(board) {
+            case 'main' : setCurrentPage(1); navigate("/recipes"); break;
+            case 'recommend' : setCurrentPage(1); navigate('/recipes/recommend'); break;
+            default : setCurrentPage(1); navigate("/recipes/recommend"); break;
         }
     }
 
@@ -80,16 +90,19 @@ function Recipes({type = 'main'}) {
             return ;
         }
 
-        navigate("/recipe-registration");
+        navigate("/recipes/register");
     }
 
     return (
         <div className={BoardCSS.board}>
             { loginModal ? <LoginModal setLoginModal={ setLoginModal }/> : null}
             <div className={BoardCSS.boardTitle}> 
-                {type === 'main'? <span>&nbsp;오늘의 레시피<img src={standingFork} alt="포크"/></span>:<span>&nbsp;관리자 추천 레시피<img src={standingFork} alt="포크"/></span>}
-                {type === 'main'? <span onClick={onClickBoardHandler}>관리자 추천 레시피&nbsp;<img src={lyingFork} alt="포크"/></span>:<span onClick={onClickBoardHandler}>오늘의 레시피&nbsp;<img src={lyingFork} alt="포크"/></span>}
-                
+                {type === 'main' && <span>&nbsp;오늘의 레시피<img src={standingFork} alt="포크"/></span>}
+                {type === 'recommend' && <span>&nbsp;관리자 추천 레시피<img src={standingFork} alt="포크"/></span>}
+                {type === 'category' && <span>&nbsp;&nbsp;{categoryName}<img src={standingFork} alt="포크"/></span>}
+
+                {type !== 'main' && <span onClick={() => onClickBoardHandler('main')}>오늘의 레시피&nbsp;<img src={lyingFork} alt="포크"/></span>}
+                {type !== 'recommend' && <span onClick={() => onClickBoardHandler('recommend')}>관리자 추천 레시피&nbsp;<img src={lyingFork} alt="포크"/></span>}
             </div>
             <div className={BoardCSS.boardItems}>
                 <hr/>
@@ -123,7 +136,7 @@ function Recipes({type = 'main'}) {
                 { Array.isArray(recipeList) &&
                 <button 
                     onClick={() => setCurrentPage(currentPage + 1)} 
-                    disabled={currentPage === pageInfo.pageEnd  || pageInfo.total === 0}
+                    disabled={currentPage === pageInfo.endPage || pageInfo.total === 0}
                     className={ BoardCSS.pagingBtn }
                 >
                     &gt;

@@ -10,9 +10,26 @@
     font-size: 20px;
 }
 
-.boardMenu>a {
-    text-decoration: none;
-    color: black;
+.boardMenu>span {
+    position: relative;
+    line-height: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.boardMenu>span:hover {
+    cursor: pointer;
+}
+
+.boardMenu>span>img {
+    position: absolute;
+    top: 4%;
+    right: 10%;
+}
+
+.boardMenu>hr {
+    margin-top: 0;
 }
 
 .boardBarImg {
@@ -31,12 +48,16 @@
     position: relative;
 }
 
-.boardBarTitle>a {
+.boardBarTitle>span {
     text-decoration: none;
     color: white;
     font-size: 20px;
     line-height: 50px;
     text-align: center;
+}
+
+.boardBarTitle>span:hover {
+    cursor: pointer;
 }
 
 .boardBarTitleBtn {

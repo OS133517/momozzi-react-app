@@ -1,0 +1,60 @@
+.myRecipeDiv {
+    margin-left: 10%;
+    font-size: 20px;
+}
+
+.names:hover {
+    cursor: pointer;
+}
+
+.myRecipeDiv td {
+    border-bottom: 1px solid #00CAA6;
+    height: 35px;
+}
+
+.myRecipeDiv thead td {
+    background-color: #00CAA6;
+    color: white;
+    height: 50px;
+    text-align: center;
+}
+
+.myRecipeDiv thead td:nth-child(1) {
+    width: 50px;
+}
+
+.myRecipeDiv thead td:nth-child(2) {
+    width: 700px;
+}
+
+
+.pagingBtnDiv {
+    display: flex;
+    list-style: none;
+    margin-left: 425px;
+}
+
+.pagingBtn {
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #00CAA6;
+    font-weight: bold;
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.pagingBtn:hover{
+    cursor: pointer;
+    background-color: rgb(12, 250, 180);
+}
+
+.controlBtn {
+    border: none;
+    background-color: white;
+}
+
+.controlBtn:hover {
+    cursor: pointer;
+}
