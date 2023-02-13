@@ -5,12 +5,24 @@ import silver from "../../images/silver.png";
 import bronze from "../../images/bronze.png";
 import recMedal from "../../images/recMedal.png";
 import thumsMedal from "../../images/thumsMedal.png";
+import jwtDecode from "jwt-decode";
 
 function Recipe({recipe, index = 4}) {
-    console.log('index 찍히나?', index);
+
     const navigate = useNavigate();
+    const isLogin = window.localStorage.getItem("accessToken") || null;
 
     const onClickRecipeHandler = (recipeNo) => {
+        if(!isLogin) {
+            alert("로그인이 필요한 서비스입니다.");
+            return;
+        }
+
+        // 토큰이 만료되었을때 다시 로그인
+        if(jwtDecode(isLogin).exp * 1000 < Date.now()) {
+            return ;
+        }
+
         navigate(`/recipes/${recipeNo}`);
     } 
 

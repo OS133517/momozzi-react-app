@@ -33,8 +33,10 @@
 }
 
 .boardBarImg {
-    width: 50%;
-    height: 50%;
+    width: 264px;
+    height: 264px;
+    /* width: 50%;
+    height: 50%; */
 }
 
 .boardBarTitle {

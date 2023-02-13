@@ -281,10 +281,10 @@ export const callMyRecipeRegistAPI = ({memberCode, recipeNo}) => {
                 "Content-Type" : "application/json",
                 "Accept" : "*/*"
             },
-            body : {
-                memberCode : memberCode,
+            body : JSON.stringify({
+                memberCode : String(memberCode),
                 recipeNo : recipeNo
-            }
+            })
         })
         .then(response => response.json());
 

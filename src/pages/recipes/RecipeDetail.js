@@ -73,7 +73,7 @@ function RecipeDetail() {
         }));
 
         alert('목록 화면으로 돌아갑니다.');
-        // navigate('/recipes', { replace: true });
+        navigate('/recipes', { replace: true });
         // window.location.reload();
     }
 
