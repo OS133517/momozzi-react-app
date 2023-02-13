@@ -40,7 +40,7 @@ function MyRecipe() {
 
     }
 
-    const onClickDetailHandler = () => {
+    const onClickDetailHandler = (recipeNo) => {
 
         // 로그인 상태인지 확인
         if(isLogin === null) {
@@ -55,7 +55,7 @@ function MyRecipe() {
             return ;
         }
 
-        navigate("/");
+        navigate(`/recipes/${recipeNo}`);
     }
 
     return (
@@ -66,9 +66,6 @@ function MyRecipe() {
             <table>
                 <thead>
                     <tr>
-                        <td>
-                            체크
-                        </td>
                         <td>
                             레시피명
                         </td>
@@ -81,7 +78,6 @@ function MyRecipe() {
                     {Array.isArray(recipeList) && 
                         recipeList.map((recipe) => 
                             <tr key={recipe.recipeNo}>
-                                <td><input type="checkbox" name="isChecked"/></td>
                                 <td className={MyRecipeCSS.names} onClick={() => onClickHandler(recipe.recipeNo)}>{recipe.recipeName}</td>
                                 <td><button 
                                         className={MyRecipeCSS.controlBtn} 

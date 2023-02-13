@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+.myRecipeDiv input {
+    margin-left: 40%;
+}
+
 .myRecipeDiv td {
     border-bottom: 1px solid #00CAA6;
     height: 35px;
@@ -20,13 +24,8 @@
 }
 
 .myRecipeDiv thead td:nth-child(1) {
-    width: 50px;
+    width: 900px;
 }
-
-.myRecipeDiv thead td:nth-child(2) {
-    width: 700px;
-}
-
 
 .pagingBtnDiv {
     display: flex;

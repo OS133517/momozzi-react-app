@@ -1,6 +1,6 @@
 import LoginModalCSS from "./LoginModal.module.css";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { callLoginAPI } from "../../apis/MemberAPICalls";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +9,25 @@ function LoginModal({setLoginModal}) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const loginMember = useSelector(state => state.memberReducer);
 
     const [form, setForm] = useState({
         memberId: '',
         memberPassword: ''
     });
+
+    useEffect(() => {
+
+        if(loginMember.status === 200) {
+            console.log("[Login] Login SUCCESS {}", loginMember);
+            setLoginModal(false);
+            window.location.reload();
+        } else if (loginMember.state === 400){
+            console.log("[Login] Login FAIL {}", loginMember);
+            alert(loginMember.message);
+        }// eslint-disable-next-line
+    }, [loginMember, navigate]);
+
     
     const onChangeHandler = (e) => {
         setForm({
@@ -29,11 +43,6 @@ function LoginModal({setLoginModal}) {
         dispatch(callLoginAPI({	// 로그인
             form: form
         }));
-
-        setLoginModal(false);
-        console.log('[LoginModal] Login Process End!!');
-        alert('로그인이 완료되었습니다.');
-        window.location.reload();
     }
 
     const onClickModalHandler = (e) => {

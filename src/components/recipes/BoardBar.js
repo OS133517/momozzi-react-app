@@ -14,15 +14,16 @@ import 중식 from "../../images/중식.png";
 import 프렌치 from "../../images/프렌치.png";
 import 한식 from "../../images/한식.png";
 import 분식 from "../../images/분식.png";
+import jwtDecode from "jwt-decode";
 
 function BoardBar({topAndRandomList}) {
 
     const navigate = useNavigate();
+    const isLogin = window.localStorage.getItem("accessToken") || null;
     const [category, setCategory] = useState({
         categoryNo : '',
         categoryName : ''
     });
-    console.log('category', category);
 
     useEffect(() => {
 
@@ -30,6 +31,17 @@ function BoardBar({topAndRandomList}) {
     }, [])
 
     const onClickBoardBarHandler = (recipeNo) => {
+
+        if(!isLogin) {
+            alert("로그인이 필요한 서비스입니다.");
+            return;
+        }
+
+        // 토큰이 만료되었을때 다시 로그인
+        if(jwtDecode(isLogin).exp * 1000 < Date.now()) {
+            return ;
+        }
+
         navigate(`/recipes/${recipeNo}`);
     }
 
@@ -65,9 +77,9 @@ function BoardBar({topAndRandomList}) {
                                                         className={BoardBarCSS.boardBarImg} 
                                                         src={topAndRandomList[3].recipeImageUrl} 
                                                         alt="오늘의 레시피" 
-                                                        onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}/>}
+                                                        onClick={() => onClickBoardBarHandler(topAndRandomList[3].recipeNo)}/>}
                 <div className={BoardBarCSS.boardBarTitle}> 
-                    {topAndRandomList.length > 0 && <span onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}>{topAndRandomList[3].recipeName}</span>}
+                    {topAndRandomList.length > 0 && <span onClick={() => onClickBoardBarHandler(topAndRandomList[3].recipeNo)}>{topAndRandomList[3].recipeName}</span>}
                     <img className={BoardBarCSS.boardBarTitleBtn} src={lyingFork} alt="바로가기버튼" onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}/>
                 </div>
             </div>
