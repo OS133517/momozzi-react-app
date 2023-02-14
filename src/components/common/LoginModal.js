@@ -47,7 +47,7 @@ function LoginModal({setLoginModal}) {
 
     const onClickModalHandler = (e) => {
         console.log(e.target.className);
-        if(e.target.className === 'LoginModal_modal__npKyi') {
+        if(e.target.className.includes('LoginModal_modal')) {
             setLoginModal(false);
         }
     }
