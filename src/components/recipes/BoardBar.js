@@ -54,17 +54,19 @@ function BoardBar({topAndRandomList}) {
             <div className={BoardBarCSS.boardMenu} onClick={onClickRandomHandler}>
                 <span>오늘의 랜덤 카테고리<img src={lyingFork} alt="바로가기버튼"/></span>
                 <hr/>
-                {category.categoryName === '한식' && <img className={BoardBarCSS.boardBarImg} src={한식} alt="랜덤메뉴"/>}
-                {category.categoryName === '동남아시아식' && <img className={BoardBarCSS.boardBarImg} src={동남아시아식} alt="랜덤메뉴"/>}
-                {category.categoryName === '디저트' && <img className={BoardBarCSS.boardBarImg} src={디저트} alt="랜덤메뉴"/>}
-                {category.categoryName === '멕시칸' && <img className={BoardBarCSS.boardBarImg} src={멕시칸} alt="랜덤메뉴"/>}
-                {category.categoryName === '샐러드' && <img className={BoardBarCSS.boardBarImg} src={샐러드} alt="랜덤메뉴"/>}
-                {category.categoryName === '양식' && <img className={BoardBarCSS.boardBarImg} src={양식} alt="랜덤메뉴"/>}
-                {category.categoryName === '이탈리안' && <img className={BoardBarCSS.boardBarImg} src={이탈리안} alt="랜덤메뉴"/>}
-                {category.categoryName === '일식' && <img className={BoardBarCSS.boardBarImg} src={일식} alt="랜덤메뉴"/>}
-                {category.categoryName === '중식' && <img className={BoardBarCSS.boardBarImg} src={중식} alt="랜덤메뉴"/>}
-                {category.categoryName === '프렌치' && <img className={BoardBarCSS.boardBarImg} src={프렌치} alt="랜덤메뉴"/>}
-                {category.categoryName === '분식' && <img className={BoardBarCSS.boardBarImg} src={분식} alt="랜덤메뉴"/>}
+                <div className={BoardBarCSS.boardBarImgContainer} >
+                    {category.categoryName === '한식' && <img className={BoardBarCSS.boardBarImg} src={한식} alt="랜덤메뉴"/>}
+                    {category.categoryName === '동남아시아식' && <img className={BoardBarCSS.boardBarImg} src={동남아시아식} alt="랜덤메뉴"/>}
+                    {category.categoryName === '디저트' && <img className={BoardBarCSS.boardBarImg} src={디저트} alt="랜덤메뉴"/>}
+                    {category.categoryName === '멕시칸' && <img className={BoardBarCSS.boardBarImg} src={멕시칸} alt="랜덤메뉴"/>}
+                    {category.categoryName === '샐러드' && <img className={BoardBarCSS.boardBarImg} src={샐러드} alt="랜덤메뉴"/>}
+                    {category.categoryName === '양식' && <img className={BoardBarCSS.boardBarImg} src={양식} alt="랜덤메뉴"/>}
+                    {category.categoryName === '이탈리안' && <img className={BoardBarCSS.boardBarImg} src={이탈리안} alt="랜덤메뉴"/>}
+                    {category.categoryName === '일식' && <img className={BoardBarCSS.boardBarImg} src={일식} alt="랜덤메뉴"/>}
+                    {category.categoryName === '중식' && <img className={BoardBarCSS.boardBarImg} src={중식} alt="랜덤메뉴"/>}
+                    {category.categoryName === '프렌치' && <img className={BoardBarCSS.boardBarImg} src={프렌치} alt="랜덤메뉴"/>}
+                    {category.categoryName === '분식' && <img className={BoardBarCSS.boardBarImg} src={분식} alt="랜덤메뉴"/>}
+                </div>
                 <div className={BoardBarCSS.boardBarTitle} onClick={onClickRandomHandler}>
                     {category && <span>{category.categoryName}</span>}
                     <img className={BoardBarCSS.boardBarTitleBtn} src={lyingFork} alt="바로가기버튼"/>
@@ -73,26 +75,28 @@ function BoardBar({topAndRandomList}) {
             <div className={BoardBarCSS.boardMenu}>
                 <span onClick={() => navigate("/recipes")}>오늘의 레시피<img src={lyingFork} alt="바로가기버튼"/></span>
                 <hr/>
-                    {topAndRandomList.length > 0 && <img 
-                                                        className={BoardBarCSS.boardBarImg} 
+                <div className={BoardBarCSS.boardBarImgContainer} >
+                    {topAndRandomList.length >= 4?  <img 
                                                         src={topAndRandomList[3].recipeImageUrl} 
                                                         alt="오늘의 레시피" 
-                                                        onClick={() => onClickBoardBarHandler(topAndRandomList[3].recipeNo)}/>}
+                                                        onClick={() => onClickBoardBarHandler(topAndRandomList[3].recipeNo)}/>:<img alt="이미지없음"/>}
+                </div>
                 <div className={BoardBarCSS.boardBarTitle}> 
-                    {topAndRandomList.length > 0 && <span onClick={() => onClickBoardBarHandler(topAndRandomList[3].recipeNo)}>{topAndRandomList[3].recipeName}</span>}
+                    {topAndRandomList.length >= 4? <span onClick={() => onClickBoardBarHandler(topAndRandomList[3].recipeNo)}>{topAndRandomList[3].recipeName}</span>:<span>레시피 없음</span>}
                     <img className={BoardBarCSS.boardBarTitleBtn} src={lyingFork} alt="바로가기버튼" onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}/>
                 </div>
             </div>
             <div className={BoardBarCSS.boardMenu}>
                 <span onClick={() => navigate("/recipes/recommend")}>관리자 추천 레시피<img src={lyingFork} alt="바로가기버튼"/></span>
                 <hr/>
-                    {topAndRandomList.length > 0 && <img 
-                                                        className={BoardBarCSS.boardBarImg} 
+                <div className={BoardBarCSS.boardBarImgContainer} >
+                    {topAndRandomList.length >= 5? <img 
                                                         src={topAndRandomList[4].recipeImageUrl} 
                                                         alt="관리자 추천 레시피" 
-                                                        onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}/>}
+                                                        onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}/>:<img alt="이미지없음"/>}
+                </div>
                 <div className={BoardBarCSS.boardBarTitle}>
-                    {topAndRandomList.length > 0 && <span onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}>{topAndRandomList[4].recipeName}</span>}
+                    {topAndRandomList.length >= 5? <span onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}>{topAndRandomList[4].recipeName}</span>:<span>레시피 없음</span>}
                     <img className={BoardBarCSS.boardBarTitleBtn} src={lyingFork} alt="바로가기버튼" onClick={() => onClickBoardBarHandler(topAndRandomList[4].recipeNo)}/>
                 </div>
             </div>
