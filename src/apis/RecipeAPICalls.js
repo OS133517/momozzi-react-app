@@ -30,7 +30,7 @@ export function getCategoryName(index) {
 
 export function getCategories() {
     
-    return (["한식", "양식", "분식", "중식", "일식", "디저트", "멕시칸", "프렌치", "동남아시아식", "이탈리안"]);
+    return (["한식", "양식", "분식", "중식", "일식", "디저트", "멕시칸", "프렌치", "동남아시아식", "이탈리안", "샐러드"]);
 }
 
 export const callRecipeListAPI = ({currentPage}) => {
