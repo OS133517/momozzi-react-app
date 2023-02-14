@@ -23,6 +23,7 @@
 
 .recipeFormDiv button:hover {
     cursor: pointer;
+    background-color: rgb(12, 250, 180);
 }
 
 .recipeFormImg {
@@ -97,7 +98,7 @@
     margin: 10px auto 0 60px;
     position: absolute;
     bottom: -60px;
-    right: 40px;
+    right: 80px;
     display: flex;
     line-height: 50px;
     justify-content: space-between;

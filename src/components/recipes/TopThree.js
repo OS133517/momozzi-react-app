@@ -11,7 +11,7 @@ function TopThree({topAndRandomList}) {
             <div className={TopThreeCSS.recommendItems}>
                 <hr style={{width : '1600px'}}/>
                 {
-                    topAndRandomList.length > 0 && topAndRandomList.filter((recipe, index) => index < 3).map((recipe, index) => (<Recipe key={recipe.recipeNo} recipe={recipe} index={index} />))
+                    topAndRandomList.length > 0 && topAndRandomList.filter((recipe, index) => index < 3 && recipe.regDate !== null).map((recipe, index) => (<Recipe key={recipe.recipeNo} recipe={recipe} index={index} />))
                 }
             </div>
         </div>

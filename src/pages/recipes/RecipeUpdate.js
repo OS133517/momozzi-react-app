@@ -183,7 +183,7 @@ function RecipeUpdate() {
                     onChange={onChangeHandler}
                     defaultValue={form.recipeBody}
                     id="recipeBody"></textarea>
-                <button onClick={onClickRecipeUpdateHandler}><span>등록하기</span><img src={pot} alt="수정"/></button>
+                <button onClick={onClickRecipeUpdateHandler}><span>수정하기</span><img src={pot} alt="수정"/></button>
             </div>
         </div>
     </>
